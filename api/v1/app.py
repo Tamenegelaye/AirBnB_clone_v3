@@ -31,11 +31,8 @@ if __name__ == '__main__':
         host = os.environ.get('HBNB_API_HOST')
     except:
         host = '0.0.0.0'
-
     try:
         port = os.environ.get('HBNB_API_PORT')
     except:
         port = '5000'
-    threaded=True
-
     app.run(host=host, port=port)
