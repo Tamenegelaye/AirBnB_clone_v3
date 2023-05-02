@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-API for AirBnB_clone_v3
+Running the server using the API 
 """
 
 import os
@@ -36,5 +36,6 @@ if __name__ == '__main__':
         port = os.environ.get('HBNB_API_PORT')
     except:
         port = '5000'
+    threaded=True
 
     app.run(host=host, port=port)
