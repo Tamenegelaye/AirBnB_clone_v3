@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 
-"""
-This program starts a falsk application
-"""
+""" Starts a falsk application """
 
 import os
 from flask import Flask, jsonify, Response
 from flask_cors import CORS
 from models import storage
 from api.v1.views import app_views
+
 app = Flask(__name__)
 app.register_blueprint(app_views)
 cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
@@ -28,6 +27,8 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    host = getenv("HBNB_API_HOST") if getenv("HBNB_API_HOST") else "0.0.0.0"
-    port = getenv("HBNB_API_PORT") if getenv("HBNB_API_PORT") else 5000
+    # set the port and host
+    host = os.environ.get('HBNB_API_HOST', '0.0.0.0')
+    port = int(os.environ.get('HBNB_API_PORT', 5000)
+    # Run the flask server using thread=true
     app.run(host=host, port=port, threaded=True)
