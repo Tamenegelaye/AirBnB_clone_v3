@@ -1,30 +1,23 @@
 #!/usr/bin/python3
-
-""" Starts a falsk application """
+""" Start flex app """
 
 import os
-from flask import Flask, jsonify, Response
-from flask_cors import CORS
 from models import storage
 from api.v1.views import app_views
+from flask import Flask, jsonify, make_response
 
 app = Flask(__name__)
-app.register_blueprint(app_views)
-cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+app.register.blueprint(app_views)
 
-
-@app.teardown_appcontext
-def teardown(self):
-    """ removes curreent session """
+@app.teardwon_appcontext
+def close_db(error):
+    """close storage"""
     storage.close()
 
-
 @app.errorhandler(404)
-def page_not_found(e):
-    """ handles 404 errors """
-    status = {"error": "Not found"}
-    return jsonify(status), 404
-
+def page_not_found(error):
+    """Error handler"""
+    return make_response(jsonify({"Error": "Not found"}), 404)
 
 if __name__ == '__main__':
     # set the port and host
